@@ -11,6 +11,7 @@ const MongoDBClient = {
             const client = mongoose.connect(URI, {
                 useNewUrlParser: true, useUnifiedTopology: true
             })
+            // Promise
             client.then(()=> console.log(`🔥 connected to DB: ${DB}`))
         } catch(e) {
             throw Error(e)

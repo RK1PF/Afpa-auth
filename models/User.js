@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema(
 );
 const secretPass = process.env.SECRETPASS;
 
-userSchema.plugin(encrypt, {secret: secretPass, encryptedFields: ['password'] });
+// plugin mongoose-encryption is not used because we have Bcrypt
+// userSchema.plugin(encrypt, {secret: secretPass, encryptedFields: ['password'] });
 
 module.exports = mongoose.model("User", userSchema);

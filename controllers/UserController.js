@@ -90,7 +90,11 @@ exports.postRegister = async (req, res) => {
                 user.save((err) => {
                     if (!err) {
                         console.log(`New user inserted: ${username}, ${name}`)
-                        res.render("secrets")
+                        res.render("secrets", {
+                            username: username,
+                            password: `Bcrypt: ${userFound.password}`,
+                            plainPassword: `Plain: ${password}`
+                        })
                     } else {
                         console.log(err)
                     }
@@ -120,7 +124,11 @@ exports.postLogin = async (req, res) => {
                 if (isValidPass) {
                     const token = generateAccesToken({ user: userFound });
                     console.log(`${username} logged in\n Token:\n${token}`);
-                    res.status(200).render("secrets");
+                    res.status(200).render("secrets", {
+                        username: username,
+                        password: `Bcrypt: ${userFound.password}`,
+                        plainPassword: `Plain: ${password}`
+                    });
                 } else {
                     console.log(`Wrong password for: ${username}`);
                     res.render("home");
